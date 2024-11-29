@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Code Editor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Live Code Editor</h1>
+      <p>Write your code in the editors below and see the output instantly!</p>
+    </header>
+
+    <section class="editor">
+      <h2>HTML Editor</h2>
+      <textarea id="html-code" placeholder="Write your HTML code here..." spellcheck="false"></textarea>
+
+      <h2>CSS Editor</h2>
+      <textarea id="css-code" placeholder="Write your CSS code here..." spellcheck="false"></textarea>
+
+      <h2>JavaScript Editor</h2>
+      <textarea id="js-code" placeholder="Write your JavaScript code here..." spellcheck="false"></textarea>
+
+      <!-- Run Button -->
+      <button id="run-code">Run Code</button>
+    </section>
+
+    <!-- Output Section -->
+    <section class="output">
+      <h2>Output:</h2>
+      <iframe id="output-frame" sandbox="allow-scripts allow-same-origin"></iframe>
+    </section>
+  </div>
+
+  <script>
+    const htmlInput = document.getElementById('html-code');
+    const cssInput = document.getElementById('css-code');
+    const jsInput = document.getElementById('js-code');
+    const runButton = document.getElementById('run-code');
+    const outputFrame = document.getElementById('output-frame');
+
+    runButton.addEventListener('click', () => {
+      // Get user input
+      const html = htmlInput.value;
+      const css = `<style>${cssInput.value}</style>`;
+      const js = `<script>${jsInput.value}<\/script>`;
+
+      // Combine all the code
+      const completeCode = html + css + js;
+
+      // Write the combined code into the iframe
+      const outputDocument = outputFrame.contentDocument || outputFrame.contentWindow.document;
+      outputDocument.open();
+      outputDocument.write(completeCode);
+      outputDocument.close();
+    });
+  </script>
+</body>
+</html>
