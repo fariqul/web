@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <header>
+        <h1>Programming Quiz</h1>
+        <p>Test your knowledge about programming languages!</p>
+    </header>
+
+    <form id="quiz-form">
+        <!-- Question 1 -->
+        <div class="question">
+            <p>1. What does HTML stand for?</p>
+            <label>
+                <input type="radio" name="q1" value="a"> Hyper Text Markup Language
+            </label>
+            <label>
+                <input type="radio" name="q1" value="b"> Hyperlinks and Text Markup Language
+            </label>
+            <label>
+                <input type="radio" name="q1" value="c"> Home Tool Markup Language
+            </label>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <p>2. What does CSS stand for?</p>
+            <label>
+                <input type="radio" name="q2" value="a"> Creative Style Sheets
+            </label>
+            <label>
+                <input type="radio" name="q2" value="b"> Cascading Style Sheets
+            </label>
+            <label>
+                <input type="radio" name="q2" value="c"> Computer Style Sheets
+            </label>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <p>3. Which programming language is used for web development?</p>
+            <label>
+                <input type="radio" name="q3" value="a"> Python
+            </label>
+            <label>
+                <input type="radio" name="q3" value="b"> JavaScript
+            </label>
+            <label>
+                <input type="radio" name="q3" value="c"> C++
+            </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="button" id="submit-quiz">Submit Quiz</button>
+    </form>
+
+    <p id="quiz-result"></p>
+
+    <script>
+        const correctAnswers = {
+            q1: 'a', // Correct answer for question 1
+            q2: 'b', // Correct answer for question 2
+            q3: 'b'  // Correct answer for question 3
+        };
+
+        document.getElementById('submit-quiz').addEventListener('click', function () {
+            const form = document.getElementById('quiz-form');
+            let score = 0;
+
+            // Loop through correctAnswers and compare with user answers
+            for (let question in correctAnswers) {
+                const userAnswer = form[question].value;
+                if (userAnswer === correctAnswers[question]) {
+                    score++;
+                }
+            }
+
+            // Display result
+            const resultText = `You scored ${score} out of ${Object.keys(correctAnswers).length}!`;
+            document.getElementById('quiz-result').innerText = resultText;
+
+            // Optional: Redirect to another page if passed
+            if (score === Object.keys(correctAnswers).length) {
+                setTimeout(() => {
+                    alert('Great job! You passed the quiz!');
+                    window.location.href = 'dashboard.php';
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
